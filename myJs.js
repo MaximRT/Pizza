@@ -1,13 +1,16 @@
-const items = ['pizza 1', 'pizza 2', 'pizza 3'];
-items[1] = 'margarita';
+const items = [
+    {title: 'Margarita', selected: false},
+    {title: 'Pepperoni', selected: false},
+    {title: 'Cheese', selected: false},
+];
 
-function add(pizza) {
-    items.push(pizza);
+function add(newPizzaName) {
+    items.push({title: newPizzaName, selected: false});
     console.log(items);
 }
 
-function edit(position, newName) {
-    items[position] = newName;
+function edit(position, newPizzaName) {
+    items[position].title = newPizzaName;
     console.log(items);
 }
 
