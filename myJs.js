@@ -19,4 +19,12 @@ function remove(position) {
     console.log(items);
 }
 
+function markAsSelected(position) {
+    const pizzaItem = items[position];
+
+    pizzaItem.selected = !pizzaItem.selected; 
+
+    console.log(items);
+}
+
 console.log(items);
