@@ -12,18 +12,18 @@ function add(newPizzaName) {
     }
 
     items.push(item);
-    console.log(items);
+    displayItems();
 }
 
 function edit(id, newPizzaName) {
     const indexItem = items.findIndex(res => res.id === id);
     items[indexItem].title = newPizzaName;
-    console.log(items);
+    displayItems();
 }
 
 function remove(id) {
     items = items.filter(res => res.id !== id);
-    console.log(items);
+    displayItems();
 }
 
 function markAsSelected(id) {
@@ -31,7 +31,9 @@ function markAsSelected(id) {
 
     items[indexItem].selected = !items[indexItem].selected; 
 
-    console.log(items);
+    displayItems();
 }
 
-console.log(items);
+function displayItems() {
+    items.forEach(res => console.log(res));
+}
