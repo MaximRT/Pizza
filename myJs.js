@@ -1,28 +1,35 @@
-const items = [
-    {title: 'Margarita', selected: false},
-    {title: 'Pepperoni', selected: false},
-    {title: 'Cheese', selected: false},
+let items = [
+    {title: 'Margarita', selected: false, id: 111},
+    {title: 'Pepperoni', selected: false, id: 222},
+    {title: 'Cheese', selected: false, id: 333},
 ];
 
 function add(newPizzaName) {
-    items.push({title: newPizzaName, selected: false});
+    const item = {
+        title: newPizzaName,
+        selected: false,
+        id: Date.now(),
+    }
+
+    items.push(item);
     console.log(items);
 }
 
-function edit(position, newPizzaName) {
-    items[position].title = newPizzaName;
+function edit(id, newPizzaName) {
+    const indexItem = items.findIndex(res => res.id === id);
+    items[indexItem].title = newPizzaName;
     console.log(items);
 }
 
-function remove(position) {
-    items.splice(position, 1);
+function remove(id) {
+    items = items.filter(res => res.id !== id);
     console.log(items);
 }
 
-function markAsSelected(position) {
-    const pizzaItem = items[position];
+function markAsSelected(id) {
+    const indexItem = items.findIndex(res => res.id === id);
 
-    pizzaItem.selected = !pizzaItem.selected; 
+    items[indexItem].selected = !items[indexItem].selected; 
 
     console.log(items);
 }
