@@ -1,7 +1,7 @@
 let items = [
-    {title: 'Margarita', selected: false, id: 111},
+    {title: 'Margarita', selected: true, id: 111},
     {title: 'Pepperoni', selected: false, id: 222},
-    {title: 'Cheese', selected: false, id: 333},
+    {title: 'Cheese', selected: true, id: 333},
 ];
 
 function add(newPizzaName) {
@@ -33,6 +33,30 @@ function markAsSelected(id) {
 
     displayItems();
 }
+
+function selectPizzas() {
+    let checkedPizzas = 0;
+    let itemsChecked = [];
+
+    items.forEach(res => {
+        if (res.selected === true)
+            checkedPizzas++;
+    });
+
+    if (checkedPizzas === items.length) {
+        itemsChecked = items.map(res => {
+            return {...res, selected: false}
+        });
+    } else {
+        itemsChecked = items.map(res => {
+            return {...res, selected: true}
+        });
+    }
+    
+    items = itemsChecked;
+    displayItems();
+}
+
 
 function displayItems() {
     items.forEach(res => console.log(res));
