@@ -25,7 +25,8 @@ function handleSubmit(e) {
 
     items.push(item);
     e.currentTarget.reset();
-    displayItems();
+
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
 function displayItems() {
@@ -55,17 +56,17 @@ function displayItems() {
       list.innerHTML = html;
 }
 
-addPizzaForm.addEventListener('submit', handleSubmit);
-
 function edit(id, newPizzaName) {
     const indexItem = items.findIndex(res => res.id === id);
     items[indexItem].title = newPizzaName;
-    displayItems();
+
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
 function remove(id) {
     items = items.filter(res => res.id !== id);
-    displayItems();
+
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
 function markAsSelected(id) {
@@ -73,7 +74,7 @@ function markAsSelected(id) {
 
     items[indexItem].selected = !items[indexItem].selected; 
 
-    displayItems();
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
 function selectPizzas() {
@@ -96,5 +97,9 @@ function selectPizzas() {
     }
     
     items = itemsChecked;
-    displayItems();
+    
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
+
+addPizzaForm.addEventListener('submit', handleSubmit);
+list.addEventListener('itemsUpdated', displayItems);
