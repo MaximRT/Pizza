@@ -1,5 +1,6 @@
 let items = [];
 
+const list = document.querySelector('.list');
 const addPizzaForm = document.querySelector('.add-pizza-form');
 
 function handleSubmit(e) {
@@ -25,6 +26,33 @@ function handleSubmit(e) {
     items.push(item);
     e.currentTarget.reset();
     displayItems();
+}
+
+function displayItems() {
+    const html = items.map(item => {
+        return (
+          `
+            <li class='pizza-item'>
+              <button value="${item.id}" class='delete'>&times;</button>
+              <div class='pizza-item-image'>
+                <img src="${item.image}" alt="${item.title}"/>
+              </div>
+              <div class='pizza-item-details'>
+                <div class='pizza-item-details-top'>
+                  <div class='itemHeader'>
+                    <input type='checkbox' />
+                    <span class='itemName'>${item.title}</span>
+                  </div>
+                  <span class='itemPrice'>${item.price}</span>
+                </div>
+                <span class='pizza-item-details-bottom'>${item.description}</span>
+              </div>
+            </li>
+          `
+        )
+      }).join('');
+
+      list.innerHTML = html;
 }
 
 addPizzaForm.addEventListener('submit', handleSubmit);
@@ -69,9 +97,4 @@ function selectPizzas() {
     
     items = itemsChecked;
     displayItems();
-}
-
-
-function displayItems() {
-    items.forEach(res => console.log(res));
 }
